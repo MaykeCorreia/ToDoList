@@ -1,49 +1,67 @@
 function adicionaTarefaNaLista() {
-    // debugger - descomentar para acompanhar o fluxo da página
-    // seleciona o elemento de input text que tem o texto da nova tarefa
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
-    if (novaTarefa.trim() !== '') { // Verifica se o campo não está vazio
+    if (novaTarefa.trim() !== '') {
         criaNovoItemDaLista(novaTarefa);
-        document.getElementById('input_nova_tarefa').value = ''; // Limpa o campo após adicionar a tarefa
+        document.getElementById('input_nova_tarefa').value = '';
     }
 }
 
 function criaNovoItemDaLista(textoDaTarefa) {
-    // recupera a lista de tarefas
     const listaTarefas = document.getElementById('lista_de_tarefas');
-    // guarda o tamanho da lista de tarefas
     let qtdTarefas = listaTarefas.children.length;
-
-    // cria um novo elemento do tipo li (lista)
     const novoItem = document.createElement('li');
-
-    // adiciona o texto digitado no texto da tarefa
     novoItem.innerText = textoDaTarefa;
-    // adiciona um ID no novo elemento
     novoItem.id = `tarefa_id_${qtdTarefas++}`;
 
-    novoItem.appendChild(criaInputCheckBoxTarefa(novoItem.id));
+    // Adiciona evento de duplo clique para editar
+    novoItem.addEventListener('dblclick', function() {
+        editaTarefa(this);
+    });
 
+    novoItem.appendChild(criaInputCheckBoxTarefa(novoItem.id));
     listaTarefas.appendChild(novoItem);
 }
 
+function editaTarefa(tarefa) {
+    const textoTarefa = tarefa.innerText;
+    const inputEdicao = document.createElement('input');
+    inputEdicao.type = 'text';
+    inputEdicao.value = textoTarefa;
+
+    inputEdicao.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            finalizaEdicaoTarefa(tarefa, inputEdicao);
+        }
+    });
+
+    tarefa.innerHTML = '';
+    tarefa.appendChild(inputEdicao);
+    inputEdicao.focus();
+}
+
+function finalizaEdicaoTarefa(tarefa, inputEdicao) {
+    const novoTexto = inputEdicao.value;
+    tarefa.innerHTML = novoTexto;
+    // Adiciona evento de duplo clique novamente para permitir futuras edições
+    tarefa.addEventListener('dblclick', function() {
+        editaTarefa(this);
+    });
+    tarefa.appendChild(criaInputCheckBoxTarefa(tarefa.id));
+}
+
 function criaInputCheckBoxTarefa(idTarefa) {
-    // cria o elemento de input
     const inputTarefa = document.createElement('input');
-    // seta o elemento para ser do tipo checkbox
     inputTarefa.type = 'checkbox';
-    // seta o onclick do input
     inputTarefa.setAttribute('onclick', `mudaEstadoTarefa('${idTarefa}')`);
     return inputTarefa;
 }
 
 function mudaEstadoTarefa(idTarefa) {
-    //Risca o texto de tarefa concluída;
     const tarefaSelecionada = document.getElementById(idTarefa);
-    if (tarefaSelecionada.style.textDecoration == 'line-through') {
-        tarefaSelecionada.style = 'text-decoration: none;';
+    if (tarefaSelecionada.style.textDecoration === 'line-through') {
+        tarefaSelecionada.style.textDecoration = 'none';
     } else {
-        tarefaSelecionada.style = 'text-decoration: line-through;';
+        tarefaSelecionada.style.textDecoration = 'line-through';
     }
 }
 
@@ -53,8 +71,7 @@ function resetTarefas() {
 
     tarefas.forEach(tarefa => {
         if (tarefa.style.textDecoration === 'line-through') {
-            listaTarefas.removeChild(tarefa); // Remove apenas as tarefas riscadas
+            listaTarefas.removeChild(tarefa);
         }
     });
 }
-
