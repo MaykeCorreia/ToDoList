@@ -9,12 +9,13 @@
 <body>
     <div class="background">
     <div>
-        <p>Como material de apoio a aula de hoje, utilizem esse link do w3s: 
+        <!-- <p>Como material de apoio a aula de hoje, utilizem esse link do w3s:
             <a target="_blank" href="https://www.w3schools.com/js/js_htmldom.asp">Material detalhado do que foi apresentado na aula do dia 28/02</a>
-        </p>
+        </p> -->
     </div>
-    <h2>Lista de Tarefas - Programação FrontEnd</h2>
-
+   
+    <div class="texto">
+        <h2>Lista de Tarefas - Programação FrontEnd</h2>
     <div id="div_area_nova_tarefa">
         <label for="input_nova_tarefa">Digite sua nova tarefa:</label>
         <input type="text" id="input_nova_tarefa">
@@ -23,8 +24,11 @@
     <div id="div_lista_de_tarefas">
         <ul id="lista_de_tarefas"> 
         </ul>
-    </div>    
-    <button onclick="resetTarefas()">Apagar Tarefas Concluídas</button>
+    </div>  
+</div>  
+    <div class="reset">
+        <button onclick="resetTarefas()">Apagar Tarefas Concluídas</button>
+    </div>
 </div>
     <script src="assets/js/app.js"></script>
 </body>
