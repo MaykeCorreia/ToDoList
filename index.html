@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>CRUD</title>
+</head>
+<body>
+    <div>
+        <p>Como material de apoio a aula de hoje, utilizem esse link do w3s: 
+            <a target="_blank" href="https://www.w3schools.com/js/js_htmldom.asp">Material detalhado do que foi apresentado na aula do dia 28/02</a>
+        </p>
+    </div>
+    <h2>Lista de Tarefas - Programação FrontEnd</h2>
+
+    <div id="div_area_nova_tarefa">
+        <label for="input_nova_tarefa">Digite sua nova tarefa:</label>
+        <input type="text" id="input_nova_tarefa">
+        <button onclick="adicionaTarefaNaLista()">+</button>
+    </div>
+    <div id="div_lista_de_tarefas">
+        <ul id="lista_de_tarefas"> 
+        </ul>
+    </div>    
+    <button onclick="resetTarefas()">Resetar Tarefas Concluídas</button>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
