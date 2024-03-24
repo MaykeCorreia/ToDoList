@@ -6,7 +6,7 @@
 }
 .background{
     background: linear-gradient(#0077ff);
-    background-image: url(img\background.jpg);
+    background-image: url(img/background.jpg);
     background-size: cover;
     background-position: center;
     width: 100%;
