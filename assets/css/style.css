@@ -4,6 +4,9 @@
     margin-right: auto;
     border-radius: 2px;
 }
+body{
+    overflow: hidden;
+}
 .background{
     background: linear-gradient(#0077ff);
     background-image: url(img/background.jpg);
