@@ -33,7 +33,7 @@ function editaTarefa(tarefa) {
             finalizaEdicaoTarefa(tarefa, inputEdicao);
         }
     });
-
+    // Se a tecla Enter for pressionada, finaliza a função
     tarefa.innerHTML = '';
     tarefa.appendChild(inputEdicao);
     inputEdicao.focus();
@@ -74,4 +74,5 @@ function resetTarefas() {
             listaTarefas.removeChild(tarefa);
         }
     });
+    // Adiciona função de Resetar todos as tarefas riscadas(Concluidas)
 }
