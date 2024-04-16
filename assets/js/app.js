@@ -1,4 +1,9 @@
-// Função para adicionar uma nova tarefa à lista
+
+// carrega as tarefas do Local Storage
+window.onload = function() {
+    carregaTarefasDoLocalStorage();
+};
+
 function adicionaTarefaNaLista() {
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
     if (novaTarefa.trim() !== '') {
@@ -59,14 +64,17 @@ function criaInputCheckBoxTarefa(idTarefa) {
 
 function mudaEstadoTarefa(idTarefa) {
     const tarefaSelecionada = document.getElementById(idTarefa);
-    if (tarefaSelecionada.style.textDecoration === 'line-through') {
-        tarefaSelecionada.style.textDecoration = 'none';
-    } else {
+    const concluida = tarefaSelecionada.querySelector('input[type="checkbox"]').checked;
+
+    if (concluida) {
         tarefaSelecionada.style.textDecoration = 'line-through';
+    } else {
+        tarefaSelecionada.style.textDecoration = 'none';
     }
 
     salvaTarefasNoLocalStorage(); // salva as tarefas atualizadas
 }
+
 
 function resetTarefas() {
     const listaTarefas = document.getElementById('lista_de_tarefas');
@@ -105,11 +113,11 @@ function carregaTarefasDoLocalStorage() {
         const tarefaElement = document.getElementById(tarefa.id);
         if (tarefa.concluida) {
             tarefaElement.style.textDecoration = 'line-through';
+            const checkbox = tarefaElement.querySelector('input[type="checkbox"]');
+            checkbox.checked = true;
         }
     });
 }
 
-// carrega as tarefas do Local Storage
-window.onload = function() {
-    carregaTarefasDoLocalStorage();
-};
+
+
